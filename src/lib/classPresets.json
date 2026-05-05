@@ -1,5 +1,30 @@
 {
-  "presets": [
+  "presets": [{
+  "id": "ap-physics-1",
+  "name": "AP Physics 1",
+  "description": "Algebra-based physics practice tests (mechanics, waves, circuits)",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-atom-icon lucide-atom\"><circle cx=\"12\" cy=\"12\" r=\"1\"/><path d=\"M20.2 20.2c2.04-2.04-1.5-8.84-7.9-15.24S-1 3.96 1.04 6s8.84 1.5 15.24 7.9s5.86 9.94 7.9 7.9Z\"/><path d=\"M3.8 3.8c-2.04 2.04 1.5 8.84 7.9 15.24s13.2 6.44 15.24 4.4s-1.5-8.84-7.9-15.24S5.84 1.76 3.8 3.8Z\"/></svg>",
+  "urls": [
+    "https://www.crackap.com/ap/physics-1/test29.html",
+    "https://www.crackap.com/ap/physics-1/test30.html",
+    "https://www.crackap.com/ap/physics-1/test31.html",
+    "https://www.crackap.com/ap/physics-1/test32.html",
+    "https://www.crackap.com/ap/physics-1/test33.html",
+    "https://www.crackap.com/ap/physics-1/test34.html",
+    "https://www.crackap.com/ap/physics-1/test35.html",
+    "https://www.crackap.com/ap/physics-1/test36.html",
+    "https://www.crackap.com/ap/physics-1/test37.html",
+    "https://www.crackap.com/ap/physics-1/test38.html",
+    "https://www.crackap.com/ap/physics-1/test39.html",
+    "https://www.crackap.com/ap/physics-1/test40.html",
+    "https://www.crackap.com/ap/physics-1/test41.html",
+    "https://www.crackap.com/ap/physics-1/test42.html",
+    "https://www.crackap.com/ap/physics-1/test43.html",
+    "https://www.crackap.com/ap/physics-1/test44.html",
+    "https://www.crackap.com/ap/physics-1/test45.html",
+    "https://www.crackap.com/ap/physics-1/test46.html"
+  ]
+},
     {
       "id": "ap-world-history",
       "name": "AP World History",
