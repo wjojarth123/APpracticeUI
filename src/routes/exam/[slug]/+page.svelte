@@ -213,6 +213,9 @@
         // Parse the HTML
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
+        const crackApFormTitle = doc.querySelector('input[name="title"]')?.getAttribute('value')?.trim() || '';
+        const crackApFormId = doc.querySelector('input[name="id"]')?.getAttribute('value')?.trim() || '';
+        const crackApFormType = doc.querySelector('input[name="type"]')?.getAttribute('value')?.trim() || '';
         
         // Extract the test title
         let title = doc.querySelector('title')?.textContent || 'AP Practice Test';
@@ -452,46 +455,49 @@
           }
           
           if (testType && testId) {
-            // Format the test type exactly as CrackAP expects
-            let formattedType = testType.replace(/-/g, ''); // Remove hyphens
-            
-            // Map test types to their expected form
-            /** @type {Record<string, string>} */
-            const typeMap = {
-              'calculusbc': 'cbc',
-              'calculusab': 'cab',
-              'physics1': 'p1',
-              'physics2': 'p2',
-              'physicselectricityandmagnetism': 'pem',
-              'physicsmechanics': 'pm',
-              'statistics': 'stat',
-              'chemistry': 'chem',
-              'biology': 'bio',
-              'ushistory': 'ush',
-              'worldhistory': 'wh',
-              'europeanhistory': 'eh',
-              'usgovernmentandpolitics': 'usgp',
-              'macroeconomics': 'macro',
-              'microeconomics': 'micro',
-              'englishlanguageandcomposition': 'lang',
-              'englishliteratureandcomposition': 'lit',
-              'environmentalscience': 'env'
-            };
-            
-            // Use the mapped type if available
-            if (typeMap[formattedType]) {
-              formattedType = typeMap[formattedType];
+            let formattedType = crackApFormType;
+            let formattedTitle = crackApFormTitle;
+            let resultsId = crackApFormId || testId;
+
+            if (!formattedType || !formattedTitle) {
+              // Fall back to the URL-based mapping when the source page omits the hidden form metadata.
+              formattedType = testType.replace(/-/g, '');
+
+              /** @type {Record<string, string>} */
+              const typeMap = {
+                'calculusbc': 'cbc',
+                'calculusab': 'cab',
+                'physics1': 'p1',
+                'physics2': 'p2',
+                'physicselectricityandmagnetism': 'pem',
+                'physicsmechanics': 'pm',
+                'statistics': 'stat',
+                'chemistry': 'chem',
+                'biology': 'bio',
+                'ushistory': 'ush',
+                'worldhistory': 'wh',
+                'europeanhistory': 'eh',
+                'usgovernmentandpolitics': 'usgp',
+                'macroeconomics': 'macro',
+                'microeconomics': 'micro',
+                'englishlanguageandcomposition': 'lang',
+                'englishliteratureandcomposition': 'lit',
+                'environmentalscience': 'env'
+              };
+
+              if (typeMap[formattedType]) {
+                formattedType = typeMap[formattedType];
+              }
+
+              formattedTitle = `AP ${testType.split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')} Practice Test ${testId}`;
             }
-            
-            // Create the exact title format CrackAP expects
-            const formattedTitle = `AP ${testType.split('-')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ')} Practice Test ${testId}`;
             
             // Create form data exactly as seen in network traces
             const formData = new URLSearchParams();
             formData.append('title', formattedTitle);
-            formData.append('id', testId);
+            formData.append('id', resultsId);
             formData.append('type', formattedType);
             
             // Add "c" parameter with all answers empty to fetch real answers
